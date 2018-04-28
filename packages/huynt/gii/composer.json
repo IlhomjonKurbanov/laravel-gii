@@ -1,0 +1,14 @@
+{
+    "name": "huyjuku/gii",
+    "description": "Gii for Laravel",
+    "authors": [
+        {
+            "name": "Huy Nguyen",
+            "email": "huynt57@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "doctrine/dbal": "2.5.*"
+    }
+}
