@@ -20,6 +20,18 @@ class GiiController extends Controller
 
 	public function index()
 	{
+
+
+		return view('gii::index');
+	}
+
+	public function getTableNames()
+	{
+		return $this->sm->listTableNames();
+	}
+
+	public function generateModels()
+	{
 		$tables = $this->getTableNames();
 
 		foreach ($tables as $table)
@@ -31,13 +43,6 @@ class GiiController extends Controller
 				':CLASS_NAME:' => 'huytest'
 			]);
 		}
-
-		return view('gii::index');
-	}
-
-	public function getTableNames()
-	{
-		return $this->sm->listTableNames();
 	}
 
 	public function generateTables()
