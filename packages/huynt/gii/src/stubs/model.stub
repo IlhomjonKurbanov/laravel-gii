@@ -1,25 +1,18 @@
 <?php
 
-namespace CLASS_NAME;
+namespace NAMESPACE;
 
-use {{extends}};
+use EXTEND;
 
 /**
- * Class DummyClass
+ * Class CLASS_NAME
  */
-class DummyClass extends {{shortNameExtends}}
-{
-    {{table}}
+class CLASS_NAME extends EXTENDS
+    TABLE
 
-    {{primaryKey}}{{timestamps}}
+    PRIMARY_KEY TIMESTAMPS
 
-    {{fillable}}
+    FILLABLE
 
-    {{guarded}}
-
-    {{getters}}
-
-    {{setters}}
-
-
+    GUARDED
 }

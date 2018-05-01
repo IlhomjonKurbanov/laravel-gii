@@ -6,4 +6,7 @@
  * Time: 10:03 PM
  */
 
-Route::get('gii', 'huynt\gii\controllers\GiiController@index');
+Route::group(['prefix' => 'gii'], function () {
+	Route::get('/', 'huynt\gii\controllers\GiiController@index');
+	Route::get('generate-model', 'huynt\gii\controllers\GiiController@generateModels');
+});

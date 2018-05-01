@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 use SebastiaanLuca\StubGenerator\StubGenerator;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
@@ -20,8 +21,6 @@ class GiiController extends Controller
 
 	public function index()
 	{
-
-
 		return view('gii::index');
 	}
 
@@ -30,19 +29,61 @@ class GiiController extends Controller
 		return $this->sm->listTableNames();
 	}
 
+	public function generateClassName($table)
+	{
+		$name = Str::singular(ucfirst(Str::camel($table)));
+		return $name;
+	}
+
+
 	public function generateModels()
 	{
-		$tables = $this->getTableNames();
+		$tables = $this->sm->listTableNames();
 
 		foreach ($tables as $table)
 		{
+			$className = $this->generateClassName($table);
+			$fillable = $this->generateFillable($table);
+			$table = 'protected $table = '.$table;
+
+			if(file_exists(app_path('Models/'.$className.'.php')))
+			{
+				unlink(app_path('Models/'.$className.'.php'));
+			}
+
 			$generator = new StubGenerator(__DIR__ . '/stubs/model.stub',
-				app_path('Models/'.$table.'.php'));
+				app_path('Models/'.$className.'.php'));
 
 			$generator->render([
-				':CLASS_NAME:' => 'huytest'
+				'CLASS_NAME' => $className,
+				'FILLABLE' => $fillable,
+				'TABLE' => $table,
 			]);
 		}
+	}
+
+	public function generateFillable($table)
+	{
+		$columns = $this->sm->listTableColumns($table);
+
+		$retVal = 'protected $fillable = [';
+
+		foreach ($columns as $column)
+		{
+			$retVal .= "'".$column->getName()."', ";
+		}
+
+		$retVal = $this->trimLast($retVal);
+		$retVal .= '];';
+
+		return $retVal;
+	}
+
+	public function trimLast($string)
+	{
+		$string = trim($string);
+		$string = rtrim($string, ',');
+		return $string;
 	}
 
 	public function generateTables()
