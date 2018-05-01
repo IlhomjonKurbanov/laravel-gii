@@ -44,7 +44,8 @@ class GiiController extends Controller
 		{
 			$className = $this->generateClassName($table);
 			$fillable = $this->generateFillable($table);
-			$table = 'protected $table = '.$table;
+			$table = 'protected $table = "'.$table.'";';
+			$primaryKey = $this->generatePrimaryKey($table);
 
 			if(file_exists(app_path('Models/'.$className.'.php')))
 			{
@@ -57,9 +58,32 @@ class GiiController extends Controller
 			$generator->render([
 				'CLASS_NAME' => $className,
 				'FILLABLE' => $fillable,
+				'PRIMARY_KEY' => $primaryKey,
 				'TABLE' => $table,
 			]);
 		}
+	}
+
+	public function generatePrimaryKey($table)
+	{
+		$retVal = 'protected $primaryKey = [';
+		$indexes = $this->sm->listTableIndexes($table);
+		foreach ($indexes as $index)
+		{
+			if($index->getName() == 'PRIMARY')
+			{
+				$columns = $index->getColumns();
+				foreach ($columns as $column)
+				{
+					$retVal .= "'" . $column . "', ";
+				}
+			}
+		}
+
+		$retVal = $this->trimLast($retVal);
+		$retVal .= '];';
+
+		return $retVal;
 	}
 
 	public function generateFillable($table)
@@ -70,7 +94,9 @@ class GiiController extends Controller
 
 		foreach ($columns as $column)
 		{
-			$retVal .= "'".$column->getName()."', ";
+			if(!$column->getAutoIncrement()) {
+				$retVal .= "'" . $column->getName() . "', ";
+			}
 		}
 
 		$retVal = $this->trimLast($retVal);

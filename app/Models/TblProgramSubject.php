@@ -7,12 +7,12 @@ use EXTEND;
 /**
  * Class TblProgramSubject
  */
-class TblProgramSubject extends EXTENDS
-    TABLE
+class TblProgramSubject extends EXTENDS {
+    protected $table = "tbl_program_subject";
 
-    PRIMARY_KEY TIMESTAMPS
+    protected $primaryKey = []; TIMESTAMPS
 
-    protected $fillable = ['id', 'program_id', 'subject_id', 'is_active'];
+    protected $fillable = ['program_id', 'subject_id', 'is_active'];
 
     GUARDED
 }

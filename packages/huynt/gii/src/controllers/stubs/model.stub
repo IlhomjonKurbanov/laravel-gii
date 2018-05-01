@@ -7,7 +7,7 @@ use EXTEND;
 /**
  * Class CLASS_NAME
  */
-class CLASS_NAME extends EXTENDS
+class CLASS_NAME extends EXTENDS {
     TABLE
 
     PRIMARY_KEY TIMESTAMPS

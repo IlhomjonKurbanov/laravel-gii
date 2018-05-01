@@ -7,12 +7,12 @@ use EXTEND;
 /**
  * Class Vote
  */
-class Vote extends EXTENDS
-    TABLE
+class Vote extends EXTENDS {
+    protected $table = "votes";
 
-    PRIMARY_KEY TIMESTAMPS
+    protected $primaryKey = []; TIMESTAMPS
 
-    protected $fillable = ['id', 'user_id', 'vote_type', 'teacher_id', 'object_type', 'rating_score'];
+    protected $fillable = ['user_id', 'vote_type', 'teacher_id', 'object_type', 'rating_score'];
 
     GUARDED
 }

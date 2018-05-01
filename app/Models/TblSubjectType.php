@@ -7,12 +7,12 @@ use EXTEND;
 /**
  * Class TblSubjectType
  */
-class TblSubjectType extends EXTENDS
-    TABLE
+class TblSubjectType extends EXTENDS {
+    protected $table = "tbl_subject_type";
 
-    PRIMARY_KEY TIMESTAMPS
+    protected $primaryKey = []; TIMESTAMPS
 
-    protected $fillable = ['id', 'subject_type_name', 'is_active'];
+    protected $fillable = ['subject_type_name', 'is_active'];
 
     GUARDED
 }

@@ -7,12 +7,12 @@ use EXTEND;
 /**
  * Class View
  */
-class View extends EXTENDS
-    TABLE
+class View extends EXTENDS {
+    protected $table = "views";
 
-    PRIMARY_KEY TIMESTAMPS
+    protected $primaryKey = []; TIMESTAMPS
 
-    protected $fillable = ['id', 'user_id', 'post_id', 'is_active', 'created_time'];
+    protected $fillable = ['user_id', 'post_id', 'is_active', 'created_time'];
 
     GUARDED
 }
