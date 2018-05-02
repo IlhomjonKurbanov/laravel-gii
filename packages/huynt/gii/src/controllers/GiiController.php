@@ -60,9 +60,18 @@ class GiiController extends Controller
 				'FILLABLE' => $fillable,
 				'PRIMARY_KEY' => $primaryKey,
 				'TABLE' => $table,
+                'NAMESPACE' => 'App\Http\Models',
+                'EXTENDS' => 'Model',
+                'USE' => 'Illuminate\Database\Eloquent\Model;',
+                'GUARDED' => ''
 			]);
 		}
 	}
+
+	public function generateMigration()
+    {
+
+    }
 
 	public function generatePrimaryKey($table)
 	{

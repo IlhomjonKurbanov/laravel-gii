@@ -2,15 +2,14 @@
 
 namespace NAMESPACE;
 
-use EXTEND;
-
+use USE
 /**
  * Class CLASS_NAME
  */
 class CLASS_NAME extends EXTENDS {
     TABLE
 
-    PRIMARY_KEY TIMESTAMPS
+    PRIMARY_KEY 
 
     FILLABLE
 
